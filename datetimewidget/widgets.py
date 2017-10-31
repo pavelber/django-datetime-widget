@@ -76,6 +76,7 @@ dateConversiontoPython = {
     'HH': '%I',
     'dd': '%d',
     'mm': '%m',
+    'MM': '%B',
     'yy': '%y',
     'yyyy': '%Y',
 }
@@ -89,6 +90,7 @@ dateConversiontoJavascript = {
     '%I': 'HH',
     '%H': 'hh',
     '%d': 'dd',
+    '%B': 'MM',
     '%Y': 'yyyy',
     '%y': 'yy',
     '%p': 'P',
