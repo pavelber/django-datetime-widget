@@ -1,6 +1,11 @@
 django-datetime-widget
 ======================
 
+**Forked in order to fix bugs, because original repository was not update a lot of time.**
+
+Fixed until now:
+* Support for MM date format
+
 .. image:: https://pypip.in/v/django-datetime-widget/badge.png
     :target: https://crate.io/packages/django-datetime-widget
 .. image:: https://pypip.in/d/django-datetime-widget/badge.png
