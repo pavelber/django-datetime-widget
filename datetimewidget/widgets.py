@@ -123,6 +123,23 @@ BOOTSTRAP_INPUT_TEMPLATE = {
        """
        }
 
+BOOTSTRAP_INPUT_TEMPLATE_NO_SCRIPT = {
+    2: """
+       <div id="%(id)s"  class="controls input-append date">
+           %(rendered_widget)s
+           %(clear_button)s
+           <span class="add-on"><i class="icon-th"></i></span>
+       </div>
+       """,
+    3: """
+       <div id="%(id)s" class="input-group date">
+           %(rendered_widget)s
+           %(clear_button)s
+           <span class="input-group-addon"><span class="glyphicon %(glyphicon)s"></span></span>
+       </div>
+       """
+       }
+
 CLEAR_BTN_TEMPLATE = {2: """<span class="add-on"><i class="icon-remove"></i></span>""",
                       3: """<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>"""}
 
@@ -223,9 +240,10 @@ class PickerWidgetMixin(object):
 
     def render(self, name, value, attrs=None):
         final_attrs = self.build_attrs(attrs)
+
         rendered_widget = super(PickerWidgetMixin, self).render(name, value, final_attrs)
 
-        #if not set, autoclose have to be true.
+        # if not set, autoclose have to be true.
         self.options.setdefault('autoclose', True)
 
         # Build javascript options out of python dictionary
@@ -239,6 +257,18 @@ class PickerWidgetMixin(object):
         id = final_attrs.get('id', uuid.uuid4().hex)
 
         clearBtn = quote('clearBtn', self.options.get('clearBtn', 'true')) == 'true'
+
+        if self.attrs['readonly']:
+            return mark_safe(
+                BOOTSTRAP_INPUT_TEMPLATE_NO_SCRIPT[self.bootstrap_version]
+                % dict(
+                    id=id,
+                    rendered_widget=rendered_widget,
+                    clear_button=CLEAR_BTN_TEMPLATE[self.bootstrap_version] if clearBtn else "",
+                    glyphicon=self.glyphicon,
+                    options=js_options
+                )
+            )
 
         return mark_safe(
             BOOTSTRAP_INPUT_TEMPLATE[self.bootstrap_version]
