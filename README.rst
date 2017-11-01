@@ -5,6 +5,7 @@ django-datetime-widget
 
 Fixed until now:
 * Support for MM date format
+* Use 'readonly' attribute
 
 .. image:: https://pypip.in/v/django-datetime-widget/badge.png
     :target: https://crate.io/packages/django-datetime-widget
